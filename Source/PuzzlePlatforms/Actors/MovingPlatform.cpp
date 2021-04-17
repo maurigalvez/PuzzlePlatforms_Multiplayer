@@ -29,6 +29,10 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// make sure platform doesn't move if <= 0 
+	if (this->ActiveTriggers <= 0)
+		return;
+
 	// check if this doesnt' have authority (client)
 	if (!this->HasAuthority())
 		return;
@@ -49,4 +53,17 @@ void AMovingPlatform::Tick(float DeltaTime)
 	FVector currentLocation = this->GetActorLocation() + (MoveDirection * this->MoveSpeed * DeltaTime);
 	// update location
 	this->SetActorLocation(currentLocation);
+}
+
+void AMovingPlatform::AddActorTrigger()
+{
+	this->ActiveTriggers++;
+}
+
+void AMovingPlatform::RemoveActorTrigger()
+{
+	if (this->ActiveTriggers > 0)
+	{
+		this->ActiveTriggers--;
+	}
 }

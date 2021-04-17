@@ -22,6 +22,9 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	void AddActorTrigger();
+	void RemoveActorTrigger();
+
 // -------------
 // PROPERTIES
 // -------------
@@ -40,4 +43,6 @@ private:
 	FVector GlobalTargetLocation = FVector::ZeroVector;
 	FVector GlobalStartLocation = FVector::ZeroVector;
 	float DistanceToTargetLocation = 0;	
+	UPROPERTY(EditAnywhere)
+	int ActiveTriggers = 1;
 };
