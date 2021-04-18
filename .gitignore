@@ -1,7 +1,9 @@
 .vs/
 PuzzlePlatforms.sln
 Binaries/
-Content/
 Intermediate/
 Saved/
 Build/
+Content/Geometry/
+Content/Mannequin/
+Content/ThirdPerson/Meshes/
