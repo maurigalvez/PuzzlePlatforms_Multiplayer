@@ -17,6 +17,9 @@ class PUZZLEPLATFORMS_API UPuzzlePlatformsGameInstance : public UGameInstance
 public:
 	UPuzzlePlatformsGameInstance(const FObjectInitializer &ObjectInitializer);
 
+	UFUNCTION(BlueprintCallable)
+	void LoadMenu();
+
 	UFUNCTION(Exec)
 	void Host();
 
@@ -25,5 +28,7 @@ public:
 
 protected:
 	virtual void Init() override;
+
+	TSubclassOf<class UUserWidget> MenuClass = nullptr;
 	
 };
