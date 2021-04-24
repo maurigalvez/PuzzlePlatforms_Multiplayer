@@ -6,6 +6,7 @@
 #include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
+#include "UI/MainMenu.h"
 // -------
 // Gets called even in editor
 // -------
@@ -35,7 +36,7 @@ void UPuzzlePlatformsGameInstance::LoadMenu()
 	if (this->MenuClass != NULL)
 	{
 		// display menu
-		UUserWidget* mainMenu = CreateWidget<UUserWidget>(this, this->MenuClass);
+		UMainMenu* mainMenu = CreateWidget<UMainMenu>(this, this->MenuClass);
 		if (mainMenu != nullptr)
 		{
 			mainMenu->AddToViewport();
@@ -46,9 +47,12 @@ void UPuzzlePlatformsGameInstance::LoadMenu()
 			inputMode.SetWidgetToFocus(mainMenu->TakeWidget());
 			controller->SetInputMode(inputMode);
 			controller->bShowMouseCursor = true;
+			// set interface
+			mainMenu->SetMenuInterface(this);
 		}		
 	}
 }
+
 void UPuzzlePlatformsGameInstance::Host()
 {
 	UEngine* engine = this->GetEngine();
