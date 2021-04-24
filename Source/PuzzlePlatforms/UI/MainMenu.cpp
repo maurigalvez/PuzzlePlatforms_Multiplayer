@@ -24,6 +24,9 @@ bool UMainMenu::Initialize()
 	if (this->JoinGameButton == nullptr) return false;
 	this->JoinGameButton->OnClicked.AddDynamic(this, &UMainMenu::Join);
 
+	if (this->ExitButton == nullptr) return false;
+	this->ExitButton->OnClicked.AddDynamic(this, &UMainMenu::ExitGame);
+
 	return true;
 }
 
@@ -72,5 +75,17 @@ void UMainMenu::Join()
 	{
 		UE_LOG(LogTemp, Error, TEXT("No Interface was found!"));
 	}
+}
+
+void UMainMenu::ExitGame()
+{
+	// find world
+	UWorld* World = this->GetWorld();
+	if (World == nullptr) return;
+	// find player controller
+	APlayerController* controller = World->GetFirstPlayerController();
+	if (controller == nullptr) return;
+	// quit
+	controller->ConsoleCommand("quit");
 }
 

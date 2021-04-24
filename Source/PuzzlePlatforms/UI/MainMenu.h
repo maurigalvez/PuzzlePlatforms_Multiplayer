@@ -30,6 +30,9 @@ private:
 	UFUNCTION()
 	void Join();
 
+	UFUNCTION()
+	void ExitGame();
+
 // ----------
 // PROPERTIES
 // ----------
@@ -50,6 +53,9 @@ private:
 	
 	UPROPERTY(meta = (BindWidget))
 	class UButton* JoinButton = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* ExitButton = nullptr;
 
 	// ---------
 	// JOIN MENU
