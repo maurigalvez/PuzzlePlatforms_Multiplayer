@@ -2,10 +2,10 @@
 
 
 #include "PuzzlePlatformsGameInstance.h"
-
 #include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
+#include "UI/MenuWidget.h"
 #include "UI/MainMenu.h"
 // -------
 // Gets called even in editor
@@ -21,6 +21,15 @@ UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitiali
 	}
 	// save menu class
 	this->MenuClass = MenuWidgetBPClass.Class;
+
+	// in game menu
+	ConstructorHelpers::FClassFinder<UUserWidget> InGameMenuBPClass(TEXT("/Game/Blueprints/Menu/WBP_InGameMenu"));
+	if (InGameMenuBPClass.Class == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Class not found"));
+		return;
+	}
+	this->InGameMenuClass = InGameMenuBPClass.Class;
 }
 
 // -----------
@@ -43,6 +52,19 @@ void UPuzzlePlatformsGameInstance::LoadMenu()
 			// set interface
 			this->MainMenu->SetMenuInterface(this);
 		}		
+	}
+}
+
+void UPuzzlePlatformsGameInstance::LoadInGameMenu()
+{
+	if (this->InGameMenuClass != NULL)
+	{
+		UMenuWidget* InGameMenu = CreateWidget<UMenuWidget>(this, this->InGameMenuClass);
+		if (InGameMenu != nullptr)
+		{
+			InGameMenu->Setup();
+			InGameMenu->SetMenuInterface(this);
+		}
 	}
 }
 
