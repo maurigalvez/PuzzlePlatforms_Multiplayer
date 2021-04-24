@@ -17,6 +17,10 @@ class PUZZLEPLATFORMS_API UMainMenu : public UUserWidget
 
 public:
 	void SetMenuInterface(IMenuInterface* NewMenuInterface);
+	// Initialize main menu
+	void Setup();
+	// Removes Main menu and setup game input mode
+	virtual void Remove();
 
 protected:
 	virtual bool Initialize();

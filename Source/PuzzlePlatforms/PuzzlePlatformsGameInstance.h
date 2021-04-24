@@ -31,5 +31,8 @@ protected:
 	virtual void Init() override;
 
 	TSubclassOf<class UUserWidget> MenuClass = nullptr;
+
+private:
+	class UMainMenu* MainMenu = nullptr;
 	
 };
