@@ -9,8 +9,8 @@
 bool UMainMenu::Initialize()
 {
 	bool Success = Super::Initialize();
-	if (!Success)
-		return false;
+	if (!Success) return false;
+
 	// Initialize buttons
 	if (this->HostButton == nullptr) return false;	
 	this->HostButton->OnClicked.AddDynamic(this, &UMainMenu::Host);
@@ -43,9 +43,14 @@ void UMainMenu::GoToMainMenu()
 
 void UMainMenu::Host()
 {
+
 	if (this->MenuInterface != nullptr)
 	{
 		this->MenuInterface->Host();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("No Interface was found!"));
 	}
 }
 
@@ -62,6 +67,10 @@ void UMainMenu::Join()
 			const FString& Address = text.ToString();
 			this->MenuInterface->Join(Address);
 		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("No Interface was found!"));
 	}
 }
 

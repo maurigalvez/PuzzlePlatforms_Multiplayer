@@ -62,6 +62,4 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 	class UEditableTextBox* IPAddressTextBox = nullptr;
-
-	IMenuInterface* MenuInterface;
 };

@@ -6,6 +6,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
 #include "UI/MenuWidget.h"
+#include "UI/InGameMenu.h"
 #include "UI/MainMenu.h"
 // -------
 // Gets called even in editor
@@ -59,7 +60,7 @@ void UPuzzlePlatformsGameInstance::LoadInGameMenu()
 {
 	if (this->InGameMenuClass != NULL)
 	{
-		UMenuWidget* InGameMenu = CreateWidget<UMenuWidget>(this, this->InGameMenuClass);
+		UInGameMenu* InGameMenu = CreateWidget<UInGameMenu>(this, this->InGameMenuClass);
 		if (InGameMenu != nullptr)
 		{
 			InGameMenu->Setup();
@@ -75,6 +76,7 @@ void UPuzzlePlatformsGameInstance::Host()
 	{
 		this->MainMenu->Remove();
 	}
+	UE_LOG(LogTemp, Warning, TEXT("HOSTING"));
 	
 	UEngine* engine = this->GetEngine();
 	if (engine == nullptr)
@@ -111,4 +113,15 @@ void UPuzzlePlatformsGameInstance::Join(const FString& Address)
 		return;
 	}	
 	controller->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
+}
+
+void UPuzzlePlatformsGameInstance::LoadMainMenu()
+{
+	// client travel through server controller
+	APlayerController* controller = this->GetFirstLocalPlayerController();
+	if (controller == nullptr)
+	{
+		return;
+	}
+	controller->ClientTravel("/Game/Maps/MainMenu", ETravelType::TRAVEL_Absolute);
 }

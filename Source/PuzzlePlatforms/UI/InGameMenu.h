@@ -17,6 +17,12 @@ class PUZZLEPLATFORMS_API UInGameMenu : public UMenuWidget
 protected:
 	virtual bool Initialize() override;
 
+	UFUNCTION()
+	void ResumeGame();
+
+	UFUNCTION()
+	void GoToMainMenu();
+
 private:
 	UPROPERTY(meta = (BindWidget))
 	class UButton* ResumeGameButton = nullptr;

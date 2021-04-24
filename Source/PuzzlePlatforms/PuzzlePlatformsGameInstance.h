@@ -25,10 +25,12 @@ public:
 	void LoadInGameMenu();
 
 	UFUNCTION(Exec)
-	void Host();
+	void Host() override;
 
 	UFUNCTION(Exec)
-	void Join(const FString& address);
+	void Join(const FString& address) override;
+
+	void LoadMainMenu() override;
 
 protected:
 	virtual void Init() override;
