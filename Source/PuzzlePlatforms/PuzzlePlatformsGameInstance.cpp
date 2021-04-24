@@ -71,6 +71,11 @@ void UPuzzlePlatformsGameInstance::Host()
 
 void UPuzzlePlatformsGameInstance::Join(const FString& Address)
 {
+	// remove menu 
+	if (this->MainMenu != nullptr)
+	{
+		this->MainMenu->Remove();
+	}
 	UEngine* engine = this->GetEngine();
 	if (engine == nullptr)
 	{
